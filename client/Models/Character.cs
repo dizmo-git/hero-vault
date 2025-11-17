@@ -24,7 +24,7 @@ public class Character
     public Stats Stats { get; set; }
     public Inventory Inventory { get; set; }
     [XmlIgnore]
-    public int Level { get; private set; } = 1;
+    public int Level { get; set; } = 1;
 
     [XmlElement("Level")]
     public int LevelSerializable
@@ -33,6 +33,7 @@ public class Character
         set => Level = value;
     }
     public int CurrentHealth { get; set; }
+    public int StatPoints { get; set; } = 0;
 
     public Character() { }
 
@@ -47,11 +48,11 @@ public class Character
         CurrentHealth = 10 + Stats.Constitution;
     }
 
-    public void LevelUp()
+    public void LevelUp(int d20Roll)
     {
         Level++;
-        Class.LevelUp(this);
-        CurrentHealth = 10 + Stats.Constitution;
+        int conBonus = (Stats.Constitution - 10) / 2;
+        CurrentHealth += d20Roll + conBonus;
     }
 
     public void UseAbility(string abilityName, Character target)
