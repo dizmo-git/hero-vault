@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -10,6 +11,7 @@ namespace client.Utilities;
 public static class XmlStorageService
 {
     private static readonly string BaseDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
+    public static string DirectoryPath => BaseDirectory;
 
     private static string EnsureXmlExtension(string fileName)
     {

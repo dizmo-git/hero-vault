@@ -2,6 +2,7 @@
 using client.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,9 +37,10 @@ public class CharacterRepository
         XmlStorageService.DeleteFile(Path.Combine("characters", $"{name}.xml"));
     }
 
-    public List<Character> GetAllCharacters()
+    public List<Character> GetAllCharacters(string path = "")
     {
-        var files = Directory.GetFiles(_folderPath, "*.xml");
+        path = path.Length == 0 ? _folderPath : path;
+        var files = Directory.GetFiles(path, "*.xml");
         var characters = new List<Character>();
 
         foreach (var file in files)

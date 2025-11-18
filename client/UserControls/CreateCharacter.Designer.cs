@@ -33,47 +33,51 @@
             classDropdown = new ComboBox();
             createButton = new Button();
             statsGroup = new GroupBox();
-            strengthLabel = new Label();
-            dexterityLabel = new Label();
-            constitutionLabel = new Label();
-            intelligenceLabel = new Label();
-            wisdomLabel = new Label();
             charismaLabel = new Label();
+            wisdomLabel = new Label();
+            intelligenceLabel = new Label();
+            constitutionLabel = new Label();
+            dexterityLabel = new Label();
+            strengthLabel = new Label();
             inventoryListBox = new ListBox();
             statsGroup.SuspendLayout();
             SuspendLayout();
             // 
             // nameInput
             // 
-            nameInput.Location = new Point(3, 3);
+            nameInput.Location = new Point(3, 2);
+            nameInput.Margin = new Padding(3, 2, 3, 2);
             nameInput.Name = "nameInput";
             nameInput.PlaceholderText = "Name";
-            nameInput.Size = new Size(211, 27);
+            nameInput.Size = new Size(185, 23);
             nameInput.TabIndex = 0;
             // 
             // raceDropdown
             // 
             raceDropdown.FormattingEnabled = true;
-            raceDropdown.Location = new Point(3, 36);
+            raceDropdown.Location = new Point(3, 27);
+            raceDropdown.Margin = new Padding(3, 2, 3, 2);
             raceDropdown.Name = "raceDropdown";
-            raceDropdown.Size = new Size(211, 28);
+            raceDropdown.Size = new Size(185, 23);
             raceDropdown.TabIndex = 1;
             raceDropdown.SelectedIndexChanged += raceDropdown_SelectedIndexChanged;
             // 
             // classDropdown
             // 
             classDropdown.FormattingEnabled = true;
-            classDropdown.Location = new Point(3, 70);
+            classDropdown.Location = new Point(3, 52);
+            classDropdown.Margin = new Padding(3, 2, 3, 2);
             classDropdown.Name = "classDropdown";
-            classDropdown.Size = new Size(211, 28);
+            classDropdown.Size = new Size(185, 23);
             classDropdown.TabIndex = 2;
             classDropdown.SelectedIndexChanged += classDropdown_SelectedIndexChanged;
             // 
             // createButton
             // 
-            createButton.Location = new Point(3, 104);
+            createButton.Location = new Point(3, 78);
+            createButton.Margin = new Padding(3, 2, 3, 2);
             createButton.Name = "createButton";
-            createButton.Size = new Size(211, 29);
+            createButton.Size = new Size(185, 22);
             createButton.TabIndex = 3;
             createButton.Text = "Create";
             createButton.UseVisualStyleBackColor = true;
@@ -87,83 +91,86 @@
             statsGroup.Controls.Add(constitutionLabel);
             statsGroup.Controls.Add(dexterityLabel);
             statsGroup.Controls.Add(strengthLabel);
-            statsGroup.Location = new Point(220, 3);
+            statsGroup.Location = new Point(192, 2);
+            statsGroup.Margin = new Padding(3, 2, 3, 2);
             statsGroup.Name = "statsGroup";
-            statsGroup.Size = new Size(417, 130);
+            statsGroup.Padding = new Padding(3, 2, 3, 2);
+            statsGroup.Size = new Size(365, 98);
             statsGroup.TabIndex = 4;
             statsGroup.TabStop = false;
             statsGroup.Text = "Stats";
             // 
-            // strengthLabel
+            // charismaLabel
             // 
-            strengthLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            strengthLabel.AutoSize = true;
-            strengthLabel.Location = new Point(6, 23);
-            strengthLabel.Name = "strengthLabel";
-            strengthLabel.Size = new Size(17, 20);
-            strengthLabel.TabIndex = 0;
-            strengthLabel.Text = "1";
+            charismaLabel.AutoSize = true;
+            charismaLabel.Location = new Point(152, 31);
+            charismaLabel.Name = "charismaLabel";
+            charismaLabel.Size = new Size(13, 15);
+            charismaLabel.TabIndex = 5;
+            charismaLabel.Text = "6";
             // 
-            // dexterityLabel
+            // wisdomLabel
             // 
-            dexterityLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            dexterityLabel.AutoSize = true;
-            dexterityLabel.Location = new Point(6, 43);
-            dexterityLabel.Name = "dexterityLabel";
-            dexterityLabel.Size = new Size(17, 20);
-            dexterityLabel.TabIndex = 1;
-            dexterityLabel.Text = "2";
-            // 
-            // constitutionLabel
-            // 
-            constitutionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            constitutionLabel.AutoSize = true;
-            constitutionLabel.Location = new Point(6, 63);
-            constitutionLabel.Name = "constitutionLabel";
-            constitutionLabel.Size = new Size(17, 20);
-            constitutionLabel.TabIndex = 2;
-            constitutionLabel.Text = "3";
+            wisdomLabel.AutoSize = true;
+            wisdomLabel.Location = new Point(152, 17);
+            wisdomLabel.Name = "wisdomLabel";
+            wisdomLabel.Size = new Size(13, 15);
+            wisdomLabel.TabIndex = 4;
+            wisdomLabel.Text = "5";
             // 
             // intelligenceLabel
             // 
             intelligenceLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             intelligenceLabel.AutoSize = true;
-            intelligenceLabel.Location = new Point(6, 83);
+            intelligenceLabel.Location = new Point(5, 62);
             intelligenceLabel.Name = "intelligenceLabel";
-            intelligenceLabel.Size = new Size(17, 20);
+            intelligenceLabel.Size = new Size(13, 15);
             intelligenceLabel.TabIndex = 3;
             intelligenceLabel.Text = "4";
             // 
-            // wisdomLabel
+            // constitutionLabel
             // 
-            wisdomLabel.AutoSize = true;
-            wisdomLabel.Location = new Point(174, 23);
-            wisdomLabel.Name = "wisdomLabel";
-            wisdomLabel.Size = new Size(17, 20);
-            wisdomLabel.TabIndex = 4;
-            wisdomLabel.Text = "5";
+            constitutionLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            constitutionLabel.AutoSize = true;
+            constitutionLabel.Location = new Point(5, 47);
+            constitutionLabel.Name = "constitutionLabel";
+            constitutionLabel.Size = new Size(13, 15);
+            constitutionLabel.TabIndex = 2;
+            constitutionLabel.Text = "3";
             // 
-            // charismaLabel
+            // dexterityLabel
             // 
-            charismaLabel.AutoSize = true;
-            charismaLabel.Location = new Point(174, 41);
-            charismaLabel.Name = "charismaLabel";
-            charismaLabel.Size = new Size(17, 20);
-            charismaLabel.TabIndex = 5;
-            charismaLabel.Text = "6";
+            dexterityLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            dexterityLabel.AutoSize = true;
+            dexterityLabel.Location = new Point(5, 32);
+            dexterityLabel.Name = "dexterityLabel";
+            dexterityLabel.Size = new Size(13, 15);
+            dexterityLabel.TabIndex = 1;
+            dexterityLabel.Text = "2";
+            // 
+            // strengthLabel
+            // 
+            strengthLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            strengthLabel.AutoSize = true;
+            strengthLabel.Location = new Point(5, 17);
+            strengthLabel.Name = "strengthLabel";
+            strengthLabel.Size = new Size(13, 15);
+            strengthLabel.TabIndex = 0;
+            strengthLabel.Text = "1";
             // 
             // inventoryListBox
             // 
             inventoryListBox.FormattingEnabled = true;
-            inventoryListBox.ItemHeight = 20;
-            inventoryListBox.Location = new Point(220, 139);
+            inventoryListBox.ItemHeight = 15;
+            inventoryListBox.Location = new Point(192, 104);
+            inventoryListBox.Margin = new Padding(3, 2, 3, 2);
             inventoryListBox.Name = "inventoryListBox";
-            inventoryListBox.Size = new Size(417, 104);
+            inventoryListBox.Size = new Size(365, 79);
             inventoryListBox.TabIndex = 5;
             // 
             // CreateCharacter
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(inventoryListBox);
             Controls.Add(statsGroup);
@@ -173,7 +180,7 @@
             Controls.Add(nameInput);
             Margin = new Padding(2);
             Name = "CreateCharacter";
-            Size = new Size(640, 304);
+            Size = new Size(560, 228);
             Load += CreateCharacter_Load;
             statsGroup.ResumeLayout(false);
             statsGroup.PerformLayout();
