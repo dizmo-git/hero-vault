@@ -29,6 +29,16 @@ namespace client.UserControls
             dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             btnView.Click += btnView_Click;
             btnDelete.Click += btnDelete_Click;
+            btnLevelUp.Click += btnLevelUp_Click;
+            StrengthUp.Click += StatUp_Click;
+            DexterityUp.Click += StatUp_Click;
+            ConstitutionUp.Click += StatUp_Click;
+            InteligenceUp.Click += StatUp_Click;
+            WisdomUp.Click += StatUp_Click;
+            CharismaUp.Click += StatUp_Click;
+            AddToInventorybutton.Click += AddToInventorybutton_Click;
+            textBox2.TextChanged += textBox2_TextChanged;
+            InventorylistBoxUp.SelectedIndexChanged += InventorylistBoxUp_SelectedIndexChanged;
 
             btnRefresh.Click += btnRefresh_Click;
         }
@@ -79,8 +89,8 @@ namespace client.UserControls
             var displayList = characters.Select(c => new
             {
                 Name = c.Name,
-                Race = c.Race.Name,
-                Class = c.Class.Name,
+                Race = c.Race?.Name ?? "Unknown",
+                Class = c.Class?.Name ?? "Unknown",
                 Level = c.Level,
                 FullCharacter = c
             }).ToList();
@@ -213,6 +223,9 @@ namespace client.UserControls
             int availablePoints = _selectedCharacter.StatPoints;
 
             // Логіка: доступні_очки >= (показник >= 14 ? 2 : 1)
+            // Активуємо кнопку підняти рівень, якщо рівень менше 20
+            btnLevelUp.Enabled = _selectedCharacter.Level < 20;
+
             StrengthUp.Enabled = availablePoints >= (_selectedCharacter.Stats.Strength >= 14 ? 2 : 1);
             DexterityUp.Enabled = availablePoints >= (_selectedCharacter.Stats.Dexterity >= 14 ? 2 : 1);
             ConstitutionUp.Enabled = availablePoints >= (_selectedCharacter.Stats.Constitution >= 14 ? 2 : 1);
@@ -253,18 +266,40 @@ namespace client.UserControls
                 // 3. Виклик методу моделі (оновлює Level та CurrentHealth)
                 _selectedCharacter.LevelUp(d20Roll);
 
-                // 4. Оновлення UI
-                btnView_Click(btnView, EventArgs.Empty);
+                // Зберігаємо новий рівень для повідомлення
+                int newLevel = _selectedCharacter.Level;
 
-                // 5. Повідомлення про успіх
+                // Автоматично зберігаємо зміни
+                _repository.Save(_selectedCharacter);
+
+                // 4. Повідомлення про успіх
                 MessageBox.Show(
                     $"Рівень підвищено! (Кидок D20: {d20Roll}, Бонус CON: {conBonus})\n" +
                     $"Новий рівень: {_selectedCharacter.Level}\n" +
                     $"Отримано очок характеристик: {pointsGained}",
                     "Рівень Підвищено");
 
-                // 6. Активуємо кнопку Edit для збереження змін
-                btnEdit.Enabled = true;
+                // 5. Оновлюємо список спочатку
+                string selectedName = _selectedCharacter.Name;
+                LoadCharactersData();
+
+                // Відновлюємо вибір
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    dynamic item = dataGridView1.Rows[i].DataBoundItem;
+                    if (item.Name == selectedName)
+                    {
+                        dataGridView1.ClearSelection();
+                        dataGridView1.Rows[i].Selected = true;
+                        _selectedCharacter = item.FullCharacter as Character;
+                        break;
+                    }
+                }
+
+                // Тепер оновлюємо UI
+                btnView_Click(btnView, EventArgs.Empty);
+
+                // Зміни вже збережені автоматично
             }
             catch (Exception ex)
             {
@@ -468,7 +503,7 @@ namespace client.UserControls
                 // що нових незбережених змін немає.
                 btnEdit.Enabled = false;
 
-                // 5. Оновлення списку персонажів (на випадок, якщо знадобиться)
+                // 5. Оновлення списку персонажів
                 LoadCharactersData();
             }
             catch (Exception ex)
@@ -478,7 +513,7 @@ namespace client.UserControls
             }
         }
 
-   
+
         /// <summary>
         /// Обробник натискання кнопки "Видалити".
         /// Видаляє або персонажа, або вибраний предмет з інвентарю.
@@ -576,7 +611,7 @@ namespace client.UserControls
             // Очищення поля вводу
             textBox1.Clear();
         }
-    
+
 
         private void InventorylistBoxUp_SelectedIndexChanged(object sender, EventArgs e)
         {

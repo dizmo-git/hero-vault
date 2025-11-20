@@ -6,6 +6,7 @@ using client.Models;
 using client.Factories;
 using client.Models.Classes;
 using client.Models.Races;
+using client.Repositories;
 
 namespace client.UserControls
 {
@@ -63,7 +64,8 @@ namespace client.UserControls
             var characterClass = ClassFactory.Create(className);
             var character = new Character(name, race, characterClass);
 
-            XmlStorageService.SaveToFile(character, name);
+            var repository = new CharacterRepository();
+            repository.Save(character);
 
             MessageBox.Show(
                 $"Character '{character.Name}' created successfully!",

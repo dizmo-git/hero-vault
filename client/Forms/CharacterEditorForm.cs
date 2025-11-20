@@ -154,8 +154,7 @@ namespace client
         {
             try
             {
-                //_characterRepo.Save(_characterToEdit);
-                XmlStorageService.SaveToFile(_characterToEdit, _characterToEdit.Name);
+                _characterRepo.Save(_characterToEdit);
                 MessageBox.Show($"Зміни для персонажа '{_characterToEdit.Name}' успішно збережено!",
                     "Збереження успішне", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnSave.Enabled = false;
@@ -169,10 +168,13 @@ namespace client
         private void DisplayCharacterInfo()
         {
             lvlLabel.Text = _characterToEdit.Level.ToString();
-            raceLabel.Text = _characterToEdit.Race.Name;
-            classLabel.Text = _characterToEdit.Class.Name;
+            raceLabel.Text = _characterToEdit.Race?.Name ?? "Unknown";
+            classLabel.Text = _characterToEdit.Class?.Name ?? "Unknown";
 
             StatsInfoRefresh();
+
+            // Активуємо кнопку підняти рівень, якщо рівень менше 20
+            btnLevelUp.Enabled = _characterToEdit.Level < 20;
 
             int availablePoints = _characterToEdit.StatPoints;
             StrengthUp.Enabled = availablePoints >= (_characterToEdit.Stats.Strength >= 14 ? 2 : 1);

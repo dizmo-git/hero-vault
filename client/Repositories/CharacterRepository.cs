@@ -37,9 +37,17 @@ public class CharacterRepository
         XmlStorageService.DeleteFile(Path.Combine("characters", $"{name}.xml"));
     }
 
-    public List<Character> GetAllCharacters(string path = "")
+    public virtual List<Character> GetAllCharacters(string path = "")
     {
-        path = path.Length == 0 ? _folderPath : path;
+        // Використовуємо папку characters
+        path = path.Length == 0 ? Path.Combine(XmlStorageService.DirectoryPath, "characters") : path;
+
+        if (!Directory.Exists(path))
+        {
+            Directory.CreateDirectory(path);
+            return new List<Character>();
+        }
+
         var files = Directory.GetFiles(path, "*.xml");
         var characters = new List<Character>();
 
@@ -47,9 +55,9 @@ public class CharacterRepository
         {
             try
             {
-                using var stream = new FileStream(file, FileMode.Open);
-                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(Character));
-                var character = (Character)serializer.Deserialize(stream);
+                // Використовуємо XmlStorageService для узгодженості
+                var fileName = Path.GetFileName(file);
+                var character = XmlStorageService.LoadFromFile<Character>(Path.Combine("characters", fileName));
                 characters.Add(character);
             }
             catch

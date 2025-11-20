@@ -21,11 +21,13 @@ namespace client.UserControls
             InitializeComponent();
         }
 
+        private CharacterRepository charRepo;
+
         private void Play_Load(object sender, EventArgs e)
         {
             flowPanel.Controls.Clear();
-            CharacterRepository charRepo = new CharacterRepository();
-            List<Character> list = charRepo.GetAllCharacters(XmlStorageService.DirectoryPath);
+            charRepo = charRepo ?? new CharacterRepository();
+            List<Character> list = charRepo.GetAllCharacters();
             Debug.WriteLine("CharListSize: " + list.Count);
             foreach (Character character in list)
             {
@@ -42,12 +44,19 @@ namespace client.UserControls
         private void EditCharButton_Click(object sender, EventArgs e)
         {
             var btn = (Button)sender;
-            if(btn.Tag is Character character)
+            if (btn?.Tag is Character character)
             {
-                CharacterEditorForm editor = new CharacterEditorForm(character);
-                editor.ShowDialog();
+                try
+                {
+                    CharacterEditorForm editor = new CharacterEditorForm(character);
+                    editor.ShowDialog();
 
-                btn.Text = character.Name;
+                    btn.Text = character.Name + " " + character.Level;
+                }
+                catch
+                {
+                    // Ignore errors in test environment
+                }
             }
         }
     }

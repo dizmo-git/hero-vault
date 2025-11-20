@@ -364,7 +364,7 @@
             flowLayoutPanel4.Controls.Add(lblCurrentLevel);
             flowLayoutPanel4.Controls.Add(btnLevelUp);
             flowLayoutPanel4.Dock = DockStyle.Fill;
-            flowLayoutPanel4.Enabled = false;
+            flowLayoutPanel4.Enabled = true;
             flowLayoutPanel4.Location = new Point(3, 65);
             flowLayoutPanel4.Name = "flowLayoutPanel4";
             flowLayoutPanel4.Size = new Size(281, 29);
